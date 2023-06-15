@@ -34,52 +34,20 @@ By harnessing real-time, fraud detection models can be trained on the most accur
 
 - Setup the [S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) to which the MongoDB Atlas data needs to be exported.
 
-#### Setup Atlas Cluster
+### Setup Atlas Cluster
 - [Set up](https://www.mongodb.com/basics/clusters/mongodb-cluster-setup#:~:text=about%20storage%20capacity.-,Creating,-a%20MongoDB%20Cluster) a MongoDB Atlas free cluster.
 - Configure the database for [network security](https://www.mongodb.com/docs/atlas/security/add-ip-address-to-list/) and access.
 
 
-#### Setup Atlas Application Services
+### Setup Atlas Application Services
 
 - Setup the [Data Federation](https://www.mongodb.com/docs/atlas/data-federation/deployment/deploy-s3/)  in Atlas and register the S3 bucket created.
 
 - Setup the Atlas Application services to create the [trigger and functions](https://www.mongodb.com/docs/atlas/app-services/triggers/scheduled-triggers/). The triggers are to be scheduled to write the data to S3 at a period frequency based on the business need for Model Training.
 
-Given below a sample script for function to write to S3 bucket.
+Please refer the [link](https://github.com/mongodb-partners/Frauddetection_with_MongoDBAtlas_and_SageMakerCanvas/blob/main/code/function_to_write_to_S3) for a sample script to write to S3 bucket.
 
-- Configure [S3](https://docs.aws.amazon.com/quickstarts/latest/s3backup/step-1-create-bucket.html) for storing data.
 
-#### MSK
-Set up [MSK](https://github.com/mongodb-partners/Atlas_to_Redshift#step-by-step-instructions-for-setting-up-amazon-msk-job) for streaming data from MongoDB Atlas to S3
-
-#### Data Wrangler
-- Create a data wrangler with endpoint deployment as stated in the below steps
-
-1. Import data into Data Wrangler  			
-<img width="1728" alt="Screenshot 2022-12-20 at 2 35 54 PM" src="https://user-images.githubusercontent.com/114057324/211983413-3d5156b5-3265-4c16-97af-4cef977e4f55.png">
-
-2. Choose S3 Bucket as Data Source
-<img width="1728" alt="Screenshot 2022-12-20 at 2 38 14 PM" src="https://user-images.githubusercontent.com/114057324/211983545-f428f226-571b-4dd0-bb4a-35b64ed40631.png">
-
-3. Select the S3 bucket to import data from and select the data
-<img width="1728" alt="Screenshot 2022-12-20 at 2 38 34 PM" src="https://user-images.githubusercontent.com/114057324/211983618-9adb24ca-00bd-4378-a003-4d1b552777a9.png">
-
-<img width="1728" alt="Screenshot 2022-12-20 at 2 38 51 PM" src="https://user-images.githubusercontent.com/114057324/211983697-81dadb55-b169-4eaf-8ba6-2edee7950e5d.png">
-
-4. Apply any transformation as required
-<img width="1728" alt="Screenshot 2022-12-20 at 2 40 04 PM" src="https://user-images.githubusercontent.com/114057324/211983766-91e5ebd6-d8a3-48d2-9dd3-a2956381b86f.png">
-
-5. Next, select the location to save the flow
-<img width="1728" alt="Screenshot 2022-12-20 at 2 40 28 PM" src="https://user-images.githubusercontent.com/114057324/211983848-9ee0ed86-07c7-47e5-a75f-551647032379.png">
-
-6. Set the experiment name and other parameters
-<img width="1728" alt="Screenshot 2022-12-20 at 2 41 14 PM" src="https://user-images.githubusercontent.com/114057324/211983958-b46b04f0-6ca2-4b95-85eb-a621a0f89afc.png">
-
-7. Select the target and feature columns for training
-<img width="1728" alt="Screenshot 2022-12-20 at 2 41 26 PM" src="https://user-images.githubusercontent.com/114057324/211984010-af02fafa-57ca-4fc6-bef4-3b80f3957f65.png">
-
-8. Select the training method which best suits your assessment
-<img width="1728" alt="Screenshot 2022-12-20 at 2 41 34 PM" src="https://user-images.githubusercontent.com/114057324/211984086-5ee65ab8-d965-444a-a049-4e63aa519275.png">
 
 9. Set the endpoint name and run the experiment.
 <img width="1728" alt="Screenshot 2022-12-20 at 2 41 47 PM" src="https://user-images.githubusercontent.com/114057324/211984132-449fe245-20e0-41e5-a54f-f07d267be806.png">
