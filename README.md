@@ -35,64 +35,53 @@ By harnessing real-time, fraud detection models can be trained on the most accur
 - Setup the [S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) to which the MongoDB Atlas data needs to be exported.
 
 ### Setup Atlas Cluster
-- [Set up](https://www.mongodb.com/basics/clusters/mongodb-cluster-setup#:~:text=about%20storage%20capacity.-,Creating,-a%20MongoDB%20Cluster) a MongoDB Atlas free cluster.
-- Configure the database for [network security](https://www.mongodb.com/docs/atlas/security/add-ip-address-to-list/) and access.
+
+[Set up](https://www.mongodb.com/basics/clusters/mongodb-cluster-setup#:~:text=about%20storage%20capacity.-,Creating,-a%20MongoDB%20Cluster) a MongoDB Atlas free cluster.
+
+Configure the database for [network security](https://www.mongodb.com/docs/atlas/security/add-ip-address-to-list/) and access.
 
 
 ### Setup Atlas Application Services
 
-- Setup the [Data Federation](https://www.mongodb.com/docs/atlas/data-federation/deployment/deploy-s3/)  in Atlas and register the S3 bucket created.
+Setup the [Data Federation](https://www.mongodb.com/docs/atlas/data-federation/deployment/deploy-s3/)  in Atlas and register the S3 bucket created.
 
-- Setup the Atlas Application services to create the [trigger and functions](https://www.mongodb.com/docs/atlas/app-services/triggers/scheduled-triggers/). The triggers are to be scheduled to write the data to S3 at a period frequency based on the business need for Model Training.
+Setup the Atlas Application services to create the [trigger and functions](https://www.mongodb.com/docs/atlas/app-services/triggers/scheduled-triggers/). The triggers are to be scheduled to write the data to S3 at a period frequency based on the business need for Model Training.
 
 Please refer the [link](https://github.com/mongodb-partners/Frauddetection_with_MongoDBAtlas_and_SageMakerCanvas/blob/main/code/function_to_write_to_S3) for a sample script to write to S3 bucket.
 
+### Setup the AWS SageMaker
+
+[Setup](https://docs.aws.amazon.com/sagemaker/latest/dg/onboard-quick-start.html) the AWS SageMaker domain 
+
+Open the Canvas Studio
+
+<img width="626" alt="image" src="https://github.com/mongodb-partners/Frauddetection_with_MongoDBAtlas_and_SageMakerCanvas/assets/101570105/ffc6b09a-7d62-474a-b1fd-60b861055ddc">
 
 
-9. Set the endpoint name and run the experiment.
-<img width="1728" alt="Screenshot 2022-12-20 at 2 41 47 PM" src="https://user-images.githubusercontent.com/114057324/211984132-449fe245-20e0-41e5-a54f-f07d267be806.png">
+Load the data from S3 bucket to Amazon SageMaker Canvas.
 
-10. Post training, the best model will be auto-deployed to the enpoint name you provided in the earlier step.
-<img width="1728" alt="Screenshot 2022-12-20 at 9 22 46 PM" src="https://user-images.githubusercontent.com/114057324/211984212-b42fa1bc-3faa-4e32-82c4-c80436dd3d3b.png">
+<img width="626" alt="image" src="https://github.com/mongodb-partners/Frauddetection_with_MongoDBAtlas_and_SageMakerCanvas/assets/101570105/4ae799db-8b7b-411b-9ba3-7f9395b7f8d7">
 
 
-#### AWS Lambda
+Merge the data from two sources – in this example:  Fraud_detection_transactions and Fraud_detection_identity.
 
-- Create a [lambda](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-awscli.html) function for calling the model endpoint
-- Modify the below function to fit your needs.
+<img width="630" alt="image" src="https://github.com/mongodb-partners/Frauddetection_with_MongoDBAtlas_and_SageMakerCanvas/assets/101570105/1127b717-c215-42ce-9b2b-a81a20b6d46d">
 
-````
-import boto3
 
-def lambda_handler(event, context):
-    # Create an SageMaker client
-    sagemaker = boto3.client('sagemaker-runtime')
+On successful creation of the join data set, click on the create model and provide an appropriate name for the model. Select the appropriate problem type based on what needs to be predicted.
 
-    # Set the endpoint name and the content type of the request
-    endpoint_name = event.get('endpoint_name')
-    content_type = '<content_type>'
+<img width="622" alt="image" src="https://github.com/mongodb-partners/Frauddetection_with_MongoDBAtlas_and_SageMakerCanvas/assets/101570105/14aa0142-5288-415a-90ff-c2b74aad1947">
 
-    # Set the input data for the request
-    input_data = event.get('input')
 
-    # Make the inference request
-    response = sagemaker.invoke_endpoint(
-        EndpointName=endpoint_name,
-        ContentType=content_type,
-        Body=input_data
-    )
+The data visualization link provides rich visualization to deep dive on the data quality. It supports scatter diagrams, bar charts, line diagrams and more.
 
-    # Get the response from the endpoint
-    result = response['Body'].read()
+<img width="629" alt="image" src="https://github.com/mongodb-partners/Frauddetection_with_MongoDBAtlas_and_SageMakerCanvas/assets/101570105/201173c1-ee4d-403d-b0fc-158597ed1786">
 
-    # Return the result
-    return {
-        'result': result
-    }
 
-````
+The data validation option helps to evaluate the data quality. It identifies the columns with missing data and highly skewed ones.
 
-With the above end-point you can make call to your sagemaker end-point to get inferences on live data.
+<img width="629" alt="image" src="https://github.com/mongodb-partners/Frauddetection_with_MongoDBAtlas_and_SageMakerCanvas/assets/101570105/934001ee-a22d-40ab-95f3-2bf20ea8eccb">
+
 
 ## Conclusion
 This is a reference architecture for application-driven analytics. This architecture can be extended for any other use cases like predictive analytics, forecasting etc. by configuring the input data and sagemaker endpoint. Reach out to partners@mongodb.com for any queries.
