@@ -40,6 +40,8 @@ Setup the [S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/crea
 
 Configure the database for [network security](https://www.mongodb.com/docs/atlas/security/add-ip-address-to-list/) and access.
 
+Sample Test Data Reference : You can refer to [Kaggle](https://www.kaggle.com/competitions/ieee-fraud-detection/data) for sample data set subjected to license agreements.
+
 
 ### Setup Atlas Application Services
 
