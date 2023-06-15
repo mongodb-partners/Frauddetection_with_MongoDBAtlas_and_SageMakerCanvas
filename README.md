@@ -32,7 +32,7 @@ By harnessing real-time, fraud detection models can be trained on the most accur
 
 ### Setup S3 Bucket
 
-- Setup the [S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) to which the MongoDB Atlas data needs to be exported.
+Setup the [S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) to which the MongoDB Atlas data needs to be exported.
 
 ### Setup Atlas Cluster
 
@@ -76,6 +76,7 @@ On successful creation of the join data set, click on the create model and provi
 The data visualization link provides rich visualization to deep dive on the data quality. It supports scatter diagrams, bar charts, line diagrams and more.
 
 <img width="629" alt="image" src="https://github.com/mongodb-partners/Frauddetection_with_MongoDBAtlas_and_SageMakerCanvas/assets/101570105/201173c1-ee4d-403d-b0fc-158597ed1786">
+
 
 
 The data validation option helps to evaluate the data quality. It identifies the columns with missing data and highly skewed ones.
