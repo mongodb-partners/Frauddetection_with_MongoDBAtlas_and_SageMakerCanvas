@@ -1,0 +1,24 @@
+exports = function () {
+
+   const service = context.services.get("<appservice_name>");
+   const db = service.db("<database_name>")
+   const events = db.collection("<collection_name>");
+
+   const pipeline = [
+    {
+            "$out": {
+               "s3": {
+                  "bucket": "<S3_bucket_name>",
+                  "region": "<AWS_Region>",
+                   "filename": {$concat: ["<S3path>/<filename>_",{"$toString":  new Date(Date.now())}]},
+                  "format": {
+                        "name": "json",
+                        "maxFileSize": "10GB"
+                  }
+               }
+            }
+      }
+   ];
+
+   return events.aggregate(pipeline);
+};
