@@ -20,22 +20,33 @@ By harnessing real-time, fraud detection models can be trained on the most accur
 [Amazon SageMaker Canvas](https://aws.amazon.com/sagemaker/canvas/) revolutionizes the way business analysts leverage AI/ML solutions by offering a powerful no-code platform. Traditionally, implementing AI/ML models required specialized technical expertise, making it inaccessible for many business analysts. However, SageMaker Canvas eliminates this barrier by providing a visual point-and-click interface to generate accurate ML predictions for classification, regression, forecasting, natural language processing (NLP), and computer vision (CV). SageMaker Canvas empowers business analysts to unlock valuable insights, make data-driven decisions, and harness the power of AI without being hindered by technical complexities. It boosts collaboration between business analysts and data scientists by sharing, reviewing, and updating ML models across tools. It brings the realm of AI/ML within reach, allowing analysts to explore new frontiers and drive innovation within their organizations.
 
 ## Architecture Diagram
-<img width="984" alt="image" src="https://user-images.githubusercontent.com/114057324/211982044-74de4a21-cd08-4d6b-9bd2-f2661eedaf8b.png">
 
-1. Web Application for accessing the end-point
-2. MongoDB Serverless 
-3. API Services
-4. Amazon MSK
-5. S3 bucket
-6. Amazon SageMaker DataWrangler
+<img width="1286" alt="image" src="https://github.com/mongodb-partners/Frauddetection_with_MongoDBAtlas_and_SageMakerCanvas/assets/101570105/16eb8ddf-65be-4909-81c3-bd7fcd7c5150">
 
-## Implementing a Fraud Detection System
-To implement a fraud detection system using AWS and MongoDB, follow the below given steps;
 
-#### Atlas Cluster
-- [Set up](https://www.mongodb.com/docs/atlas/tutorial/create-serverless-instance/) a serverless cluster in MongoDB Atlas.
+
+
+
+
+## Step-by-Step Instruction
+
+### Setup S3 Bucket
+
+- Setup the [S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) to which the MongoDB Atlas data needs to be exported.
+
+#### Setup Atlas Cluster
+- [Set up](https://www.mongodb.com/basics/clusters/mongodb-cluster-setup#:~:text=about%20storage%20capacity.-,Creating,-a%20MongoDB%20Cluster) a MongoDB Atlas free cluster.
 - Configure the database for [network security](https://www.mongodb.com/docs/atlas/security/add-ip-address-to-list/) and access.
-#### S3 Bucket
+
+
+#### Setup Atlas Application Services
+
+- Setup the [Data Federation](https://www.mongodb.com/docs/atlas/data-federation/deployment/deploy-s3/)  in Atlas and register the S3 bucket created.
+
+- Setup the Atlas Application services to create the [trigger and functions](https://www.mongodb.com/docs/atlas/app-services/triggers/scheduled-triggers/). The triggers are to be scheduled to write the data to S3 at a period frequency based on the business need for Model Training.
+
+Given below a sample script for function to write to S3 bucket.
+
 - Configure [S3](https://docs.aws.amazon.com/quickstarts/latest/s3backup/step-1-create-bucket.html) for storing data.
 
 #### MSK
