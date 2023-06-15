@@ -47,7 +47,29 @@ Sample Test Data Reference : You can refer to [Kaggle](https://www.kaggle.com/co
 
 Setup the [Data Federation](https://www.mongodb.com/docs/atlas/data-federation/deployment/deploy-s3/)  in Atlas and register the S3 bucket created.
 
+
+<img width="1691" alt="image" src="https://github.com/mongodb-partners/Frauddetection_with_MongoDBAtlas_and_SageMakerCanvas/assets/101570105/f74f23d5-77a8-4d7c-a17e-4b037b5d2dc7">
+
+
+
+
+
 Setup the Atlas Application services to create the [trigger and functions](https://www.mongodb.com/docs/atlas/app-services/triggers/scheduled-triggers/). The triggers are to be scheduled to write the data to S3 at a period frequency based on the business need for Model Training.
+
+
+
+#### Function
+<img width="1726" alt="image" src="https://github.com/mongodb-partners/Frauddetection_with_MongoDBAtlas_and_SageMakerCanvas/assets/101570105/e6e44019-7223-4b52-89a3-eef5e60c31b2">
+
+#### Function Script
+<img width="1726" alt="image" src="https://github.com/mongodb-partners/Frauddetection_with_MongoDBAtlas_and_SageMakerCanvas/assets/101570105/3c12782c-12eb-4259-afce-2899da45d3f7">
+
+#### Trigger
+<img width="1725" alt="image" src="https://github.com/mongodb-partners/Frauddetection_with_MongoDBAtlas_and_SageMakerCanvas/assets/101570105/b09f8770-0f2f-40fd-bcbc-e5fb7a4e70b3">
+
+#### Trigger Configuration
+<img width="977" alt="image" src="https://github.com/mongodb-partners/Frauddetection_with_MongoDBAtlas_and_SageMakerCanvas/assets/101570105/a7e369fb-f968-464c-9f87-83de67b15171">
+
 
 Please refer the [link](https://github.com/mongodb-partners/Frauddetection_with_MongoDBAtlas_and_SageMakerCanvas/blob/main/code/function_to_write_to_S3) for a sample script to write to S3 bucket.
 
